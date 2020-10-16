@@ -93,8 +93,8 @@ class IRQAppLogic():
         # Setting X-axis limits 
         gantt.set_xlim(0, 160)
         # Setting labels for x-axis and y-axis 
-        gantt.set_xlabel('seconds since start')
-        gantt.set_ylabel('Processor')
+        gantt.set_xlabel('Ciclos')
+        gantt.set_ylabel('Procesos')
         # Setting ticks on y-axis 
         gantt.set_yticks([15, 25, 35]) 
         # Labelling tickes of y-axis 
