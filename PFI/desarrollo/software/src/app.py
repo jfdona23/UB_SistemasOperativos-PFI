@@ -1,16 +1,15 @@
 """
 Application to show the IRQ workflow and other useful things.
 """
-import flask
 import os
-from flask import render_template, abort, request, redirect
+from flask import Flask, render_template, abort, request, redirect
 from flask.helpers import make_response
 
 from logic import IRQAppLogic
 
 
 # App config zone
-app = flask.Flask(__name__)
+app = Flask(__name__)
 app.config['DEBUG'] = True
 app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024  # 1MB max upload
 app.config['UPLOAD_EXTENSIONS'] = ['.csv', '.txt']
