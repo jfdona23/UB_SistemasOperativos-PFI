@@ -1,3 +1,4 @@
+.vscode
 venv
 __pycache__
 PFI/desarrollo/software/src/assets/*

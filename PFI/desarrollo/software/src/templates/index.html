@@ -21,67 +21,59 @@
   <br>
   <hr>
   <style type="text/css">
-    .tg  {border-collapse:collapse;border-spacing:0;}
-    .tg td{border-color:whitesmoke;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-      overflow:hidden;padding:10px 5px;word-break:normal;}
-    .tg th{border-color:whitesmoke;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-      font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-    .tg .tg-baqh{text-align:center;vertical-align:top}
-    .tg .tg-amwm{font-weight:bold;text-align:center;vertical-align:top}
-    .tg .tg-0lax{text-align:left;vertical-align:top}
-    @media screen and (max-width: 767px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;}}
-  </style>
-  <div class="tg-wrap">
-    <table class="tg">
-      <thead>
-        <tr>
-          <th class="tg-amwm">Parámetro</th>
-          <th class="tg-amwm">Descripción</th>
-          <th class="tg-amwm">Tipo</th>
-          <th class="tg-amwm">Actualmente<br></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="tg-0lax">Nombre</td>
-          <td class="tg-0lax">Nombre de la interrupcion.</td>
-          <td class="tg-0lax">String (10 chars)</td>
-          <td class="tg-baqh">{{ irqData['name'] }}</td>
-        </tr>
-        <tr>
-          <td class="tg-0lax">Enmascarable<br></td>
-          <td class="tg-0lax">0 (No) / 1 (Si)</td>
-          <td class="tg-0lax">Integer</td>
-          <td class="tg-baqh">{{ irqData['mask'] }}</td>
-        </tr>
-        <tr>
-          <td class="tg-0lax">Prioridad</td>
-          <td class="tg-0lax">Grado de prioridad. 1 es el mas alto.</td>
-          <td class="tg-0lax">Integer (1-100)</td>
-          <td class="tg-baqh">{{ irqData['priority'] }}</td>
-        </tr>
-        <tr>
-          <td class="tg-0lax">Disparo</td>
-          <td class="tg-0lax">Ciclo en el que ocurre la irq.</td>
-          <td class="tg-0lax">Integer (&gt;0)</td>
-          <td class="tg-baqh">{{ irqData['trigger'] }}</td>
-        </tr>
-        <tr>
-          <td class="tg-0lax">Duracion</td>
-          <td class="tg-0lax">Duracion de la irq.</td>
-          <td class="tg-0lax">Integer (&gt;0)</td>
-          <td class="tg-baqh">{{ irqData['duration'] }}</td>
-        </tr>
-        <tr>
-          <td class="tg-0lax">Quantum</td>
-          <td class="tg-0lax">Duracion del quantum</td>
-          <td class="tg-0lax">Integer (&gt;0)</td>
-          <td class="tg-baqh">{{ irqData['quantum'] }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    .tg  {border-collapse:collapse;border-color:#93a1a1;border-spacing:0;margin:0px auto;}
+    .tg td{background-color:#fdf6e3;border-color:#93a1a1;border-style:solid;border-width:0px;color:#002b36;
+      font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
+    .tg th{background-color:#657b83;border-color:#93a1a1;border-style:solid;border-width:0px;color:#fdf6e3;
+      font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+    .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+    .tg .tg-7btt{border-color:inherit;font-weight:bold;text-align:center;vertical-align:top}
+    .tg .tg-fymr{border-color:inherit;font-weight:bold;text-align:left;vertical-align:top}
+    .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+    @media screen and (max-width: 767px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;margin: auto 0px;}}</style>
+    <div class="tg-wrap"><table class="tg">
+    <thead>
+      <tr>
+        <th class="tg-7btt">Parámetro</th>
+        <th class="tg-7btt">Descripción</th>
+        <th class="tg-7btt">Tipo</th>
+        <th class="tg-7btt">Actualmente</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="tg-fymr">Nombre</td>
+        <td class="tg-0pky">Nombre de la interrupción.</td>
+        <td class="tg-0pky">String (10 chrs)</td>
+        <td class="tg-9wq8" rowspan="6">{{ irqData }}</td>
+      </tr>
+      <tr>
+        <td class="tg-fymr">Enmascarable</td>
+        <td class="tg-0pky">0 (No) / 1 (Si)</td>
+        <td class="tg-0pky">Integer</td>
+      </tr>
+      <tr>
+        <td class="tg-fymr">Prioridad</td>
+        <td class="tg-0pky">Grado de prioridad. 1 es el mas alto.</td>
+        <td class="tg-0pky">Integer (1-100)</td>
+      </tr>
+      <tr>
+        <td class="tg-fymr">Disparo</td>
+        <td class="tg-0pky">Ciclo en que ocurre la irq.</td>
+        <td class="tg-0pky">Integer (&gt;0)<br></td>
+      </tr>
+      <tr>
+        <td class="tg-fymr">Duración</td>
+        <td class="tg-0pky">Duración de la irq en ciclos.</td>
+        <td class="tg-0pky">Integer (&gt;0)</td>
+      </tr>
+      <tr>
+        <td class="tg-fymr">Quantum</td>
+        <td class="tg-0pky">Duración del quantum.</td>
+        <td class="tg-0pky">Integer (&gt;0)</td>
+      </tr>
+    </tbody>
+    </table></div>
   <hr>
-  <br>
-  <img src="/static/output.png" alt="gantt">
+  <img style="display: block; margin-left: auto; margin-right: auto;" src="/static/output.png" alt="gantt">
 </body>

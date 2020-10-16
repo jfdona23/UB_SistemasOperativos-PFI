@@ -75,33 +75,23 @@ class IRQAppLogic():
         # fig.update_xaxes(tickformat="1")
         # plotly.offline.plot(fig, filename='static/out.html')
 
-        # Interactive mode OFF / Write to file
-        matplotlib.use('agg')
-        # Declaring a figure (fig) and an array of axis (gantt)
-        fig, gantt = plt.subplots()
-        # Setting Y-axis limits 
-        gantt.set_ylim(0, 50)
-        # Setting X-axis limits 
+        matplotlib.use('agg')   # Interactive mode OFF / Write to file
+        fig, gantt = plt.subplots() # Declaring a figure (fig) and an array of axis (gantt)
+        gantt.set_ylim(0, 5)
         gantt.set_xlim(0, 160)
-        # Setting labels for x-axis and y-axis 
         gantt.set_xlabel('Ciclos')
         gantt.set_ylabel('Procesos')
         # Setting ticks on y-axis 
-        gantt.set_yticks([15, 25, 35]) 
-        # Labelling tickes of y-axis 
-        gantt.set_yticklabels(['1', '2', '3']) 
-        # Setting graph attribute 
+        # gantt.set_yticks([15, 25, 35])
+        # Labelling ticks of y-axis 
+        # gantt.set_yticklabels(['1', '2', '3'])
         gantt.grid(True) 
-        # Declaring a bar in schedule 
-        gantt.broken_barh([(40, 50)], (30, 9), facecolors =('tab:orange')) 
-        # Declaring multiple bars in at same level and same width 
-        gantt.broken_barh([(110, 10), (150, 10)], (10, 9), 
-                                facecolors ='tab:blue') 
-        gantt.broken_barh([(10, 50), (100, 20), (130, 10)], (20, 9), 
-                                        facecolors =('tab:red')) 
+        gantt.broken_barh([(40, 50)], (3, 1), facecolors =('tab:orange')) 
+        gantt.broken_barh([(110, 10), (150, 10)], (1, 1), facecolors ='tab:blue') 
+        gantt.broken_barh([(10, 50), (100, 20), (130, 10)], (2, 1), facecolors =('tab:red')) 
         plt.savefig("static/output.png")
 
-        i = irqData[0] if len(irqData) > 0 else None
+        i = irqData if len(irqData) > 0 else None
         return i
 
 
