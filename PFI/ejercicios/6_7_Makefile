@@ -1,0 +1,11 @@
+all: intermedio
+
+intermedio: static1.c
+	$(CC) $(CFLAGS) -static static1.c -o intermedio
+
+install:
+	mv intermedio ejecutable
+clean: 
+	rm -f ejecutable
+
+

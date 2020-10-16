@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="/static/favicon.ico">
+  <title>Index</title>
+</head>
+
+<body style="background-color:#181a1b;color:#e8e6e3;">
+  <h1 style="color: green">
+    <img src="/static/tux_boca.png" alt="Tux de Boca" style="float:right;width:128px;height:128px;">
+    IRQ Workflow by Group 2 - Universidad de Belgrano - Year 2020</h1>
+  <p>Suba un archivo de valores separados por comas formato .csv o .txt acorde con la tabla.</p>
+  <form method=post enctype=multipart/form-data>
+    <input type=file name=file>
+    <input type=submit value=Subir>
+  </form>
+  <br>
+  <hr>
+  <style type="text/css">
+    .tg  {border-collapse:collapse;border-spacing:0;}
+    .tg td{border-color:whitesmoke;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+      overflow:hidden;padding:10px 5px;word-break:normal;}
+    .tg th{border-color:whitesmoke;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+      font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+    .tg .tg-baqh{text-align:center;vertical-align:top}
+    .tg .tg-amwm{font-weight:bold;text-align:center;vertical-align:top}
+    .tg .tg-0lax{text-align:left;vertical-align:top}
+    @media screen and (max-width: 767px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;}}
+  </style>
+  <div class="tg-wrap">
+    <table class="tg">
+      <thead>
+        <tr>
+          <th class="tg-amwm">Parámetro</th>
+          <th class="tg-amwm">Descripción</th>
+          <th class="tg-amwm">Tipo</th>
+          <th class="tg-amwm">Actualmente<br></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tg-0lax">Nombre</td>
+          <td class="tg-0lax">Nombre de la interrupcion.</td>
+          <td class="tg-0lax">String (10 chars)</td>
+          <td class="tg-baqh">{{ irqData['name'] }}</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax">Enmascarable<br></td>
+          <td class="tg-0lax">0 (No) / 1 (Si)</td>
+          <td class="tg-0lax">Integer</td>
+          <td class="tg-baqh">{{ irqData['mask'] }}</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax">Prioridad</td>
+          <td class="tg-0lax">Grado de prioridad. 1 es el mas alto.</td>
+          <td class="tg-0lax">Integer (1-100)</td>
+          <td class="tg-baqh">{{ irqData['priority'] }}</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax">Disparo</td>
+          <td class="tg-0lax">Ciclo en el que ocurre la irq.</td>
+          <td class="tg-0lax">Integer (&gt;0)</td>
+          <td class="tg-baqh">{{ irqData['trigger'] }}</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax">Duracion</td>
+          <td class="tg-0lax">Duracion de la irq.</td>
+          <td class="tg-0lax">Integer (&gt;0)</td>
+          <td class="tg-baqh">{{ irqData['duration'] }}</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax">Quantum</td>
+          <td class="tg-0lax">Duracion del quantum</td>
+          <td class="tg-0lax">Integer (&gt;0)</td>
+          <td class="tg-baqh">{{ irqData['quantum'] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>

@@ -1,0 +1,33 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: irq-app
+  labels:
+    app: irq-app
+spec:
+  containers:
+  - name: python-runner
+    image: jfdona23/ub-os-pfi
+    resources:
+      limits:
+        memory: "64Mi"
+        cpu: "100m"
+    ports:
+      - containerPort: 5000
+    livenessProbe:
+      httpGet:
+        path: /ping
+        port: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: irq-app
+spec:
+  type: LoadBalancer
+  selector:
+    app: irq-app
+  ports:
+  - port: 80
+    targetPort: 5000
