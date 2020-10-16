@@ -1,9 +1,6 @@
 import subprocess
 import csv
 import os
-# import plotly
-# import plotly.express as px
-# import pandas as pd
 import matplotlib
 import matplotlib.pyplot as plt
 from pathlib import Path
@@ -56,24 +53,6 @@ class IRQAppLogic():
                     
     def processAll(self):
         irqData = self.__parseCSV(self.__pickUpLastCreatedFile(self.uploadsDirectory))
-
-        # df = pd.DataFrame([
-        #     dict(Task="Job A", Start='2020-11-01', Finish='2020-11-8'),
-        #     dict(Task="Job A", Start='2020-11-11', Finish='2020-11-20'),
-        #     dict(Task="Job B", Start='2020-11-08', Finish='2020-11-10')
-        # ])
-
-        # fig = px.timeline(df,
-        #                   x_start="Start",
-        #                   x_end="Finish",
-        #                   y="Task",
-        #                   color="Task",
-        #                   hover_data={"Task": True,
-        #                               "Start": False,
-        #                               "Finish": False})
-        # fig.update_yaxes(autorange="reversed") # otherwise tasks are listed from the bottom up
-        # fig.update_xaxes(tickformat="1")
-        # plotly.offline.plot(fig, filename='static/out.html')
 
         matplotlib.use('agg')   # Interactive mode OFF / Write to file
         fig, gantt = plt.subplots() # Declaring a figure (fig) and an array of axis (gantt)
