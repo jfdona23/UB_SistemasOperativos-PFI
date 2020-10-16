@@ -41,24 +41,15 @@ class IRQAppLogic():
         5- Quantum
         """
         goodFile = []
-        badFile = [{'name':      'null',
-                   'mask':      -1,
-                   'priority':  -1,
-                   'trigger':   -1,
-                   'duration':  -1,
-                   'quantum':   -1}]
+        badFile = [{'name': 'null', 'mask': -1, 'priority': -1, 'trigger': -1, 'duration': -1, 'quantum': -1}]
         if file == None:
             return badFile
         with open(file) as csv_file:
-            csv_reader = csv.reader(csv_file, delimiter=',')
+            csv_reader = csv.DictReader(csv_file, delimiter=',')
             for row in csv_reader:
                 if len(row) == 6:
-                    goodFile.append({'name':     row[0],
-                                     'mask':     row[1],
-                                     'priority': row[2],
-                                     'trigger':  row[3],
-                                     'duration': row[4],
-                                     'quantum':  row[5]})
+                    goodFile.append(row)
+                    print(row)
                 else:
                     return badFile
             return goodFile
