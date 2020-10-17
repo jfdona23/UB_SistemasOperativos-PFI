@@ -83,13 +83,16 @@ class IRQAppLogic():
                     gantt.broken_barh([(t, q)], (ladder, 1), facecolors=('tab:blue'), label=n)
                     gantt.broken_barh([(t + q, 1)], (ladder + 1, 1), facecolors='grey', label='OV')
                     t = t + q + 1
+                if lastFrag > 0:
                     gantt.broken_barh([(t, lastFrag)], (ladder, 1), facecolors=('tab:blue'), label=n)
+                    gantt.broken_barh([(t + lastFrag, 1)], (ladder + 1, 1), facecolors='grey', label='OV')
             else:
                 gantt.broken_barh([(t, d)], (ladder, 1), facecolors=('tab:blue'), label=n)
+                gantt.broken_barh([(t + q, 1)], (ladder + 1, 1), facecolors='grey', label='OV')
             limX += t
             limY += 1
-            ladder += 1
-        limY *= 2   # By two in order to get some extra space
+            ladder += 2
+        limY *= 3   # By 3 in order to get some extra space
 
         ## -- Start Gantt graph Settings -- ##
         fig.tight_layout()
