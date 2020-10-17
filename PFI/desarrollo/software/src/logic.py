@@ -1,6 +1,7 @@
 import subprocess
 import csv
 import os
+from typing import OrderedDict
 import matplotlib
 import matplotlib.pyplot as plt
 from pathlib import Path
@@ -27,7 +28,8 @@ class IRQAppLogic():
 
     def __parseCSV(self, file):
         """
-        Consume the csv file with IRQ data and timings and produce a pythonic output
+        Consume the CSV file with IRQ data and timings and returns a list of dictionaries
+        containing the irq data parsed from the CSV
 
         File columns are as follow:
         0- Name
@@ -46,28 +48,59 @@ class IRQAppLogic():
             for row in csv_reader:
                 if len(row) == 6:
                     goodFile.append(row)
-                    print(row)
                 else:
                     return badFile
             return goodFile
                     
     def processAll(self):
+        """
+        Process the CSV and generates a Gantt graph.
+        It returns a list of dictionaries containing the irq data parsed from the CSV
+        """
         irqData = self.__parseCSV(self.__pickUpLastCreatedFile(self.uploadsDirectory))
+        # Create the plot
+        matplotlib.use('agg')       # Interactive mode OFF / Write to file
+        _, gantt = plt.subplots()   # Declaring a figure (fig) and an array of axis (gantt)
+        # Start the action, aka Gantt population
+        ladder = 1
+        limX = 1
+        limY = 0
+        for i in irqData:
+            n = i.get('name')
+            t = int(i.get('trigger'))
+            d = int(i.get('duration'))
+            q = int(i.get('quantum'))
+            if d > q:
+                frags = d // q
+                lastFrag = d % q
+                for i in range(0,frags):
+                    gantt.broken_barh([(t, q)], (ladder, 1), facecolors=('tab:blue'), label=n)
+                    gantt.broken_barh([(t + q, 1)], (ladder + 1, 1), facecolors='black', label='OV')
+                    t = t + q + 1
+                    gantt.broken_barh([(t, lastFrag)], (ladder, 1), facecolors=('tab:blue'), label=n)
+            else:
+                gantt.broken_barh([(t, d)], (ladder, 1), facecolors=('tab:blue'), label=n)
+            limX += t
+            limY += 1
+            ladder += 1
+        limY *= 2   # By two in order to get some extra space
 
-        matplotlib.use('agg')   # Interactive mode OFF / Write to file
-        fig, gantt = plt.subplots() # Declaring a figure (fig) and an array of axis (gantt)
-        gantt.set_ylim(0, 5)
-        gantt.set_xlim(0, 160)
+        ## -- Start Gantt graph Settings -- ##
+        gantt.grid(True)
         gantt.set_xlabel('Ciclos')
         gantt.set_ylabel('Procesos')
-        # Setting ticks on y-axis 
-        # gantt.set_yticks([15, 25, 35])
-        # Labelling ticks of y-axis 
-        # gantt.set_yticklabels(['1', '2', '3'])
-        gantt.grid(True) 
-        gantt.broken_barh([(40, 50)], (3, 1), facecolors =('tab:orange')) 
-        gantt.broken_barh([(110, 10), (150, 10)], (1, 1), facecolors ='tab:blue') 
-        gantt.broken_barh([(10, 50), (100, 20), (130, 10)], (2, 1), facecolors =('tab:red')) 
+        gantt.set_ylim(0, limY)
+        gantt.set_xlim(0, limX)
+        # Dynamically set the X ticks
+        ticks = [x for x in range(0,limX + 1)]
+        gantt.set_xticks(ticks)
+        # handle duplicated labels
+        handles, labels = plt.gca().get_legend_handles_labels()
+        byLabel = OrderedDict(zip(labels, handles))
+        gantt.legend(byLabel.values(), byLabel.keys(), loc="upper right")
+        ## -- End Gantt graph Settings -- ##
+
+        # Save the file to disk
         plt.savefig("static/output.png")
 
         i = irqData if len(irqData) > 0 else None
