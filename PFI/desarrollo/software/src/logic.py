@@ -51,6 +51,12 @@ class IRQAppLogic():
                 else:
                     return badFile
             return goodFile
+
+    def cleanFiles(self):
+        toRemove = Path(self.uploadsDirectory).iterdir()
+        for r in toRemove:
+            os.remove(r)
+        return
                     
     def processAll(self):
         """

@@ -45,7 +45,15 @@ def uploadFile():
             uploaded_file.save(fileToUpload)
         else:
             redirect(request.url)
-    return redirect(request.url)
+    return redirect('/')
+
+@app.route('/clean', methods=['GET'])
+def cleanUploadFolder():
+    """
+    Clean uploaded files
+    """
+    logic.cleanFiles()
+    return 'Archivos eliminados...'
 
 @app.route('/irq', methods=['GET'])
 def currentIRQ():
