@@ -11,8 +11,8 @@ spec:
     image: jfdona23/ub-os-pfi
     resources:
       limits:
-        memory: "64Mi"
-        cpu: "100m"
+        memory: "128Mi"
+        cpu: "250m"
     ports:
       - containerPort: 5000
     livenessProbe:
