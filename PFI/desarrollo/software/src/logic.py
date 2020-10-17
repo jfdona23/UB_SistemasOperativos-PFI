@@ -100,7 +100,7 @@ class IRQAppLogic():
         # handle duplicated labels
         handles, labels = plt.gca().get_legend_handles_labels()
         byLabel = OrderedDict(zip(labels, handles))
-        gantt.legend(byLabel.values(), byLabel.keys(), loc="upper right")
+        gantt.legend(byLabel.values(), byLabel.keys(), loc="best")
         ## -- End Gantt graph Settings -- ##
         
         # Tune the colors prior saving
