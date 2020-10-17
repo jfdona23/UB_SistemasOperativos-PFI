@@ -60,7 +60,7 @@ class IRQAppLogic():
         irqData = self.__parseCSV(self.__pickUpLastCreatedFile(self.uploadsDirectory))
         # Create the plot
         matplotlib.use('agg')       # Interactive mode OFF / Write to file
-        _, gantt = plt.subplots()   # Declaring a figure (fig) and an array of axis (gantt)
+        fig, gantt = plt.subplots()   # Declaring a figure (fig) and an array of axes (gantt)
         # Start the action, aka Gantt population
         ladder = 1
         limX = 1
@@ -75,7 +75,7 @@ class IRQAppLogic():
                 lastFrag = d % q
                 for i in range(0,frags):
                     gantt.broken_barh([(t, q)], (ladder, 1), facecolors=('tab:blue'), label=n)
-                    gantt.broken_barh([(t + q, 1)], (ladder + 1, 1), facecolors='black', label='OV')
+                    gantt.broken_barh([(t + q, 1)], (ladder + 1, 1), facecolors='grey', label='OV')
                     t = t + q + 1
                     gantt.broken_barh([(t, lastFrag)], (ladder, 1), facecolors=('tab:blue'), label=n)
             else:
@@ -86,6 +86,9 @@ class IRQAppLogic():
         limY *= 2   # By two in order to get some extra space
 
         ## -- Start Gantt graph Settings -- ##
+        fig.tight_layout()
+        fig.subplots_adjust(top=0.90)
+        fig.suptitle('Diagrama de Interrupciones', fontsize=14)
         gantt.grid(True)
         gantt.set_xlabel('Ciclos')
         gantt.set_ylabel('Procesos')
@@ -99,9 +102,19 @@ class IRQAppLogic():
         byLabel = OrderedDict(zip(labels, handles))
         gantt.legend(byLabel.values(), byLabel.keys(), loc="upper right")
         ## -- End Gantt graph Settings -- ##
-
+        
+        # Tune the colors prior saving
+        # gantt.spines['bottom'].set_color('white')
+        # gantt.spines['top'].set_color('white') 
+        # gantt.spines['right'].set_color('white')
+        # gantt.spines['left'].set_color('white')
+        # gantt.tick_params(axis='x', colors='white')
+        # gantt.tick_params(axis='y', colors='white')
+        # gantt.yaxis.label.set_color('white')
+        # gantt.xaxis.label.set_color('white')
+        # gantt.title.set_color('white')
         # Save the file to disk
-        plt.savefig("static/output.png")
+        plt.savefig("static/output.png", transparent=False)
 
         i = irqData if len(irqData) > 0 else None
         return i
