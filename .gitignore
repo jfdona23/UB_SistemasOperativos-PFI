@@ -2,4 +2,5 @@
 venv
 __pycache__
 PFI/desarrollo/software/src/assets/*
+!PFI/desarrollo/software/src/assets/.placeholder
 PFI/desarrollo/software/src/static/output.*
